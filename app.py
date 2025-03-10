@@ -1,5 +1,5 @@
 import streamlit as st
-import UwindsorMultiRegression as UwindsorMultiRegression
+import model as model
 
 st.title('Grade Predictor')
 st.write("Hello, welcome to the Grade Predictor App. Please enter the required details and we will predict your grade.")
@@ -46,7 +46,7 @@ if "num_labs" in st.session_state and "num_assignments" in st.session_state and 
         # Ensure it's a 2D array
         input_array = [input_features]  # Wrapping in a list makes it a 2D array with one sample
 
-        result = UwindsorMultiRegression.createModelandTest(input_array)
+        result = model.createModelandTest(input_array)
         return result  # Extract the single predicted value
 
     # Button to submit grades and predict
