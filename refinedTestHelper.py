@@ -35,3 +35,19 @@ def outPutTestignData(y_test,y_pred):
     print("Predictions within 20%:", diff_less_than_20)
     print("Average difference between predicted and real:", total_difference / len(y_test))
     print("MSE:", mse / len(y_test))
+
+def checkWithin5(y_test,y_pred) -> int:
+    i=0
+    diff_less_than_5=0
+
+    for x in y_pred:
+        diff = abs(y_pred[i] - y_test.iloc[i])
+
+        if diff<=5:
+            diff_less_than_5 = diff_less_than_5 + 1
+
+        i = i + 1
+
+    return diff_less_than_5
+
+
