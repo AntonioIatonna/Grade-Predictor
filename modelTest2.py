@@ -1,6 +1,8 @@
 import numpy as np
 import pandas
+from sklearn.exceptions import ConvergenceWarning
 import modelTestData
+import warnings
 
 from sklearn.model_selection import train_test_split
 from sklearn.neural_network import MLPRegressor
@@ -65,13 +67,24 @@ modelTestData.outPutTestignData(y_test,pred)
 
 # ---- Neural Network (MLPRegressor) ----
 print("\nTesting Neural Network (MLPRegressor)")
-params =[
+params = [
     {'Hidden Layers': (50,), 'Max Iter': 1000},
     {'Hidden Layers': (100,), 'Max Iter': 1000}
 ]
-for p in params:
-        mlp = MLPRegressor(hidden_layer_sizes=p['Hidden Layers'], max_iter=p['Max Iter'], random_state=42).fit(X_train_scaled, y_train)
 
+for p in params:
+    with warnings.catch_warnings():
+        warnings.filterwarnings("ignore", category=ConvergenceWarning)
+        mlp = MLPRegressor(hidden_layer_sizes=p['Hidden Layers'],
+                           max_iter=p['Max Iter'],
+                           learning_rate_init=0.001,
+                           alpha=0.01,
+                           batch_size=32,
+                           random_state=42,
+                           ).fit(X_train_scaled, y_train)
+        pred = mlp.predict(X_test_scaled)
+        modelTestData.outPutTestignData(y_test,pred)
+    
 
 
 
