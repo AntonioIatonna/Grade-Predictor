@@ -1,4 +1,3 @@
-import numpy as np
 import pandas
 from sklearn.exceptions import ConvergenceWarning
 import refinedTestHelper
@@ -7,12 +6,9 @@ import warnings
 from sklearn.model_selection import train_test_split
 from sklearn.neural_network import MLPRegressor
 from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import mean_absolute_error, mean_squared_error
 
-from sklearn.linear_model import ElasticNet, Lasso
-from sklearn.linear_model import LinearRegression
-from sklearn.ensemble import GradientBoostingRegressor, RandomForestRegressor
-from sklearn.linear_model import Ridge
+from sklearn.linear_model import ElasticNet
+from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.svm import SVR
 
 
@@ -25,7 +21,7 @@ X = df[feature_cols]
 y = df[target_col]
 
 # Split data into training and testing sets
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, shuffle=True)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, shuffle=True)
 
 # Standardize the features to be used when needed
 scaler = StandardScaler()

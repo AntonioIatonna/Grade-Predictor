@@ -49,5 +49,3 @@ def checkWithin5(y_test,y_pred) -> int:
         i = i + 1
 
     return diff_less_than_5
-
-

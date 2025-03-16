@@ -1,20 +1,15 @@
-import numpy as np
 import pandas
 from sklearn.exceptions import ConvergenceWarning
-import modelTestData
+import refinedTestHelper
 import warnings
 
 from sklearn.model_selection import train_test_split
 from sklearn.neural_network import MLPRegressor
 from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import mean_absolute_error, mean_squared_error
 
-from sklearn.linear_model import ElasticNet, Lasso
-from sklearn.linear_model import LinearRegression
-from sklearn.ensemble import GradientBoostingRegressor, RandomForestRegressor
-from sklearn.linear_model import Ridge
+from sklearn.linear_model import ElasticNet
+from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.svm import SVR
-
 
 df = pandas.read_csv("CombiDataset.csv")
 
@@ -23,8 +18,6 @@ target_col = 'F'
 
 X = df[feature_cols]
 y = df[target_col]
-
-
 
 # We will now test and comapre the various different models
 
@@ -52,7 +45,7 @@ for i in range(50):
     for p in params:
         svr = SVR(kernel='rbf', C=p['c'], gamma=p['Gamma']).fit(X_train_scaled, y_train)
         pred = svr.predict(X_test_scaled)
-        svmLessThan5 = svmLessThan5 + modelTestData.checkWithin5(y_test,pred)
+        svmLessThan5 = svmLessThan5 + refinedTestHelper.checkWithin5(y_test,pred)
     
 
     # ---- ElasticNet Regression ---- 
@@ -66,13 +59,13 @@ for i in range(50):
     for p in params:
             enet = ElasticNet(alpha=p['Alpha'], l1_ratio=p['l1_ratio'], max_iter=10000, random_state=42).fit(X_train_scaled, y_train)
             pred = enet.predict(X_test_scaled)
-            enetLessThan5 = enetLessThan5 + modelTestData.checkWithin5(y_test,pred)
+            enetLessThan5 = enetLessThan5 + refinedTestHelper.checkWithin5(y_test,pred)
 
     # ---- Gradient Boosting Regressor ----
     #print("\nTesting Gradient Boosting Regressor")
     gbr = GradientBoostingRegressor(learning_rate=0.01, n_estimators=100, random_state=42).fit(X_train_scaled, y_train)
     pred = gbr.predict(X_test_scaled)
-    gbrLessThan5 = gbrLessThan5 + modelTestData.checkWithin5(y_test,pred)
+    gbrLessThan5 = gbrLessThan5 + refinedTestHelper.checkWithin5(y_test,pred)
 
     # ---- Neural Network (MLPRegressor) ----
     #print("\nTesting Neural Network (MLPRegressor)")
@@ -92,11 +85,9 @@ for i in range(50):
                             random_state=42,
                             ).fit(X_train_scaled, y_train)
             pred = mlp.predict(X_test_scaled)
-            nnLessThan5 = nnLessThan5 + modelTestData.checkWithin5(y_test,pred)
+            nnLessThan5 = nnLessThan5 + refinedTestHelper.checkWithin5(y_test,pred)
         
 print('SVM: ', svmLessThan5)
 print('enet: ', enetLessThan5)
 print('gbr: ', gbrLessThan5)
 print('nn: ', nnLessThan5)
-
-
