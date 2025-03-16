@@ -1,7 +1,7 @@
 import numpy as np
 import pandas
 from sklearn.exceptions import ConvergenceWarning
-import modelTestData
+import refinedTestHelper
 import warnings
 
 from sklearn.model_selection import train_test_split
@@ -43,7 +43,7 @@ params = [
 for p in params:
     svr = SVR(kernel='rbf', C=p['c'], gamma=p['Gamma']).fit(X_train_scaled, y_train)
     pred = svr.predict(X_test_scaled)
-    modelTestData.outPutTestignData(y_test,pred)
+    refinedTestHelper.outPutTestignData(y_test,pred)
    
 
 # ---- ElasticNet Regression ---- 
@@ -57,13 +57,13 @@ params = [
 for p in params:
         enet = ElasticNet(alpha=p['Alpha'], l1_ratio=p['l1_ratio'], max_iter=10000, random_state=42).fit(X_train_scaled, y_train)
         pred = enet.predict(X_test_scaled)
-        modelTestData.outPutTestignData(y_test,pred)
+        refinedTestHelper.outPutTestignData(y_test,pred)
 
 # ---- Gradient Boosting Regressor ----
 print("\nTesting Gradient Boosting Regressor")
 gbr = GradientBoostingRegressor(learning_rate=0.01, n_estimators=100, random_state=42).fit(X_train_scaled, y_train)
 pred = gbr.predict(X_test_scaled)
-modelTestData.outPutTestignData(y_test,pred)
+refinedTestHelper.outPutTestignData(y_test,pred)
 
 # ---- Neural Network (MLPRegressor) ----
 print("\nTesting Neural Network (MLPRegressor)")
@@ -83,8 +83,4 @@ for p in params:
                            random_state=42,
                            ).fit(X_train_scaled, y_train)
         pred = mlp.predict(X_test_scaled)
-        modelTestData.outPutTestignData(y_test,pred)
-    
-
-
-
+        refinedTestHelper.outPutTestignData(y_test,pred)
