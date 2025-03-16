@@ -66,8 +66,8 @@ modelTestData.outPutTestignData(y_test,pred)
 # ---- Neural Network (MLPRegressor) ----
 print("\nTesting Neural Network (MLPRegressor)")
 params =[
-    {'Hidden Layers': '(50,),', 'Max Iter': 1000},
-    {'Hidden Layers': '(100,),', 'Max Iter': 1000}
+    {'Hidden Layers': (50,), 'Max Iter': 1000},
+    {'Hidden Layers': (100,), 'Max Iter': 1000}
 ]
 for p in params:
         mlp = MLPRegressor(hidden_layer_sizes=p['Hidden Layers'], max_iter=p['Max Iter'], random_state=42).fit(X_train_scaled, y_train)
