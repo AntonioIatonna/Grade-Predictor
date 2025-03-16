@@ -106,3 +106,6 @@ for h in hidden_layer_sizes:
         print("Hidden layer sizes: {}".format(h), " || Max Iterations:", i)
         print("Training set score: {:.8f}".format(mlp.score(X_train_scaled, y_train)))
         print("Test set score: {:.8f}".format(mlp.score(X_test_scaled, y_test)))
+
+
+
