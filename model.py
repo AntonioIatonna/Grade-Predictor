@@ -1,8 +1,19 @@
 import pandas
-from sklearn import linear_model
+from sklearn.exceptions import ConvergenceWarning
+import refinedTestHelper
+import warnings
+
+from sklearn.model_selection import train_test_split
+from sklearn.neural_network import MLPRegressor
+from sklearn.preprocessing import StandardScaler
+
+from sklearn.linear_model import ElasticNet
+from sklearn.ensemble import GradientBoostingRegressor
+from sklearn.svm import SVR
+
 
 def createModelandTest(grades):
-    df = pandas.read_csv("uwindsorMarksPercentage.csv")
+    df = pandas.read_csv("CombiDataset.csv")
 
     feature_cols = ['L1', 'L2', 'L3', 'L4', 'L5', 'L6', 'L7', 'L7B', 'L8', 'A1', 'A2', 'A3', 'A4', 'A5', 'M']
     target_col = 'F'
@@ -10,9 +21,10 @@ def createModelandTest(grades):
     X = df[feature_cols]
     y = df[target_col]
 
-    regr = linear_model.LinearRegression()
-    regr.fit(X, y)
+    scaler = StandardScaler()
+    feature_columns_scaled = scaler.fit_transform(X)
 
-    predicted = regr.predict(grades)
+    svr = SVR(kernel='rbf', C=10, gamma=0.001).fit(feature_columns_scaled, y)
+    predicted = svr.predict(grades)
 
     return predicted[0]  # Extract single predicted value
