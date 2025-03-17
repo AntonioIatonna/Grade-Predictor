@@ -1,15 +1,9 @@
 import pandas
-from sklearn.exceptions import ConvergenceWarning
-import refinedTestHelper
-import warnings
 import numpy as np
 
-from sklearn.model_selection import train_test_split
-from sklearn.neural_network import MLPRegressor
 from sklearn.preprocessing import StandardScaler
 
 from sklearn.linear_model import ElasticNet
-from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.svm import SVR
 
 
@@ -41,7 +35,5 @@ averaged_series = pandas.Series(averaged_predictions, name="Averaged Predictions
 for index, (pred, actual) in enumerate(zip(averaged_series, y)):
     print(f"Row {index+2}: Averaged Prediction = {pred:.4f}, Actual = {actual}, difference = {pred - actual}")
 
-
-
-
-
+average_diff = np.mean(np.abs(averaged_series - y))
+print(f"Average difference between predicted and real: {average_diff}")
