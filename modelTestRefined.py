@@ -21,7 +21,7 @@ X = df[feature_cols]
 y = df[target_col]
 
 # Split data into training and testing sets
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, shuffle=True)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25)
 
 # Standardize the features to be used when needed
 scaler = StandardScaler()
