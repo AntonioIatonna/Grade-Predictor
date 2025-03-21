@@ -62,7 +62,7 @@ elif st.session_state["choice"] == "Predict Final":
 
         # Placeholder function for predict_grade
         def predict_grade(grades):
-            return 85  # Example grade prediction
+            return model.createModelandTest(grades)
 
         # Button to submit grades and predict
         if st.button("Predict Grade", key="predict_button"):
