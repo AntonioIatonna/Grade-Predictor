@@ -5,20 +5,35 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.linear_model import ElasticNet
 import numpy as np
 
-def createModelandTest(grades):
+def createModelandTest(grades,numLabs, numAssignments,numMidterms):
     df = pd.read_csv("FinalDataset.csv")
 
-    labs = grades.get('labs', [])
-    assignments = grades.get('assignments', [])
-    midterms = grades.get('midterms', [])
-    combined_grades = labs + assignments + midterms
+    if numLabs > 9:
+        raise ValueError("Number of labs cannot exceed 9.")
+    if numAssignments > 5:
+        raise ValueError("Number of assignments cannot exceed 5.")
+    if numMidterms > 1:
+        raise ValueError("Number of assignments cannot exceed 1.")
 
-    print(combined_grades)
+ # Define lab and assignment columns
+    lab_cols = [f"L{i}" for i in range(1, 10)] 
+    assignment_cols = [f"A{i}" for i in range(1, 6)]
+    midterm_cols = [f"M"]
 
-    feature_cols = ['L1', 'L2', 'L3', 'L4', 'L5', 'L6', 'L7', 'L8', 'L9', 'A1', 'A2', 'A3', 'A4', 'A5', 'M']
+    # Select the requested number of columns
+    selected_labs = lab_cols[:numLabs]
+    selected_assignments = assignment_cols[:numAssignments]
+    selected_midterm= midterm_cols[:numMidterms]
+
+    # Combine the selected columns
+    selected_cols = selected_labs + selected_assignments + selected_midterm
+
+    # Check if columns exist in the DataFrame and exclude any "M" column
+    valid_cols = [col for col in selected_cols if col in df.columns]
+
     target_col = 'F'
 
-    X = df[feature_cols]
+    X = df[valid_cols]
     y = df[target_col]
 
     scaler = MinMaxScaler()
@@ -30,7 +45,9 @@ def createModelandTest(grades):
     enet4 = ElasticNet(alpha=0.1, l1_ratio=0.1, max_iter=10000, random_state=42).fit(feature_columns_scaled, y)
 
     # Convert grades to DataFrame with correct column names
-    grades_df = pd.DataFrame([combined_grades], columns=feature_cols)
+    proper_grades = grades['labs'] + grades['assignments'] + grades['midterms']
+    proper_grades_2d = [proper_grades]
+    grades_df = pd.DataFrame(proper_grades_2d, columns=valid_cols)
     print(grades_df)
 
 
@@ -57,7 +74,7 @@ def createModelandTestMidterm(grades, numLabs, numAssignments):
         raise ValueError("Number of assignments cannot exceed 3.")
 
     # Define lab and assignment columns
-    lab_cols = [f"L{i}" for i in range(1, 10)] + ["L7B"]  # Add L7B explicitly
+    lab_cols = [f"L{i}" for i in range(1, 10)] 
     assignment_cols = [f"A{i}" for i in range(1, 6)]
 
     # Select the requested number of columns
