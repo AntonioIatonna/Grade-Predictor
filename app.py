@@ -58,7 +58,7 @@ if st.session_state["choice"] == "Predict Midterm":
 
         # Placeholder function for predict_grade ***** ALEX STARTING CHANGE HERE ********
         def predict_grade(grades):
-            return model.createModelandTest(grades)
+            return model.createModelandTestMidterm(grades,st.session_state["num_labs"],st.session_state["num_assignments"])
 
         # Button to submit grades and predict
         if st.button("Predict Grade", key="predict_button"):
