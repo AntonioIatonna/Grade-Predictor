@@ -66,7 +66,7 @@ def createModelandTest(grades,numLabs, numAssignments,numMidterms):
     return averaged_prediction[0]  # Extract single predicted value
 
 def createModelandTestMidterm(grades, numLabs, numAssignments):
-    df = pd.read_csv("CombiDataset.csv")
+    df = pd.read_csv("FinalDataset.csv")
 
     if numLabs > 5:
         raise ValueError("Number of labs cannot exceed 5.")
