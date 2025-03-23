@@ -6,7 +6,7 @@ from sklearn.linear_model import ElasticNet
 import numpy as np
 
 def createModelandTest(grades):
-    df = pd.read_csv("CombiDataset.csv")
+    df = pd.read_csv("FinalDataset.csv")
 
     labs = grades.get('labs', [])
     assignments = grades.get('assignments', [])
@@ -15,7 +15,7 @@ def createModelandTest(grades):
 
     print(combined_grades)
 
-    feature_cols = ['L1', 'L2', 'L3', 'L4', 'L5', 'L6', 'L7', 'L7B', 'L8', 'A1', 'A2', 'A3', 'A4', 'A5', 'M']
+    feature_cols = ['L1', 'L2', 'L3', 'L4', 'L5', 'L6', 'L7', 'L8', 'L9', 'A1', 'A2', 'A3', 'A4', 'A5', 'M']
     target_col = 'F'
 
     X = df[feature_cols]
