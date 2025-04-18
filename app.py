@@ -56,7 +56,7 @@ if st.session_state["choice"] == "Predict Midterm":
             "midterms": midterm_grades
         }
 
-        # Placeholder function for predict_grade ***** ALEX STARTING CHANGE HERE ********
+        # Placeholder function for predict_grade
         def predict_grade(grades):
             return model.createModelandTestMidterm(grades,st.session_state["num_labs"],st.session_state["num_assignments"])
 
@@ -64,8 +64,6 @@ if st.session_state["choice"] == "Predict Midterm":
         if st.button("Predict Grade", key="predict_button"):
             st.session_state["predicted_grade"] = predict_grade(grades)
             st.rerun()  # Refresh to show the prediction
-
-        # **** ALEX ENDING CHANGE HERE ********
 
 # If user wants to predict final grade
 elif st.session_state["choice"] == "Predict Final":

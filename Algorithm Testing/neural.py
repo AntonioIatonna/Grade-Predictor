@@ -68,5 +68,3 @@ print("Predictions within 10%:", diff_less_than_10)
 print("Predictions within 20%:", diff_less_than_20)
 print("Average difference between predicted and real:", total_difference / test_size)
 print("MSE:", mse_total / test_size)
-
-# Get feature importance using permutation importance (optional)

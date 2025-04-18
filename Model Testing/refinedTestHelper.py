@@ -7,7 +7,6 @@ def outPutTestignData(y_test,y_pred):
     diff_less_than_5=0
     diff_less_than_1=0
 
-
     for x in y_pred:
         diff = abs(y_pred[i] - y_test.iloc[i])
         total_difference = total_difference + diff

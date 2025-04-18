@@ -1,7 +1,4 @@
 import pandas as pd
-from sklearn.model_selection import train_test_split
-
-
 
 data = pd.read_csv('CombiDataset.csv')
 
@@ -17,7 +14,6 @@ midTotal=0
 labsVariance=0
 assignVariance=0
 midVariance=0
-
 
 for index, row in train.iterrows():
     labTemp=(row['L1']+row['L2']+row['L3']+row['L4']+row['L5']+row['L6']+row['L7']+row['L7B']+row['L8'])/9 - row['F']
@@ -46,7 +42,7 @@ assignPortion=(1/assignVariance)/(1/labsVariance+1/assignVariance+1/midVariance)
 midtermPortion=(1/midVariance)/(1/labsVariance+1/assignVariance+1/midVariance)
 print("portions: ",labsPortion,assignPortion,midtermPortion)
 
-#Test portion 
+# Test portion 
 
 finalGuess = 0
 guessDiff=0
@@ -87,5 +83,3 @@ print("Predictions within 10%:", diff_less_than_10)
 print("Predictions within 20%:", diff_less_than_20)
 print("Average difference: ",guessDiff)
 print("Average difference: ",guessDiffSquared)
-
-

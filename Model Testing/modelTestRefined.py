@@ -11,7 +11,6 @@ from sklearn.linear_model import ElasticNet
 from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.svm import SVR
 
-
 df = pandas.read_csv("CombiDataset.csv")
 
 feature_cols = ['L1', 'L2', 'L3', 'L4', 'L5', 'L6', 'L7', 'L7B', 'L8', 'A1', 'A2', 'A3', 'A4', 'A5', 'M']
@@ -28,7 +27,7 @@ scaler = StandardScaler()
 X_train_scaled = scaler.fit_transform(X_train)
 X_test_scaled = scaler.transform(X_test)
 
-# We will now test and comapre the various different models
+# We will now test and compare the various different models
 
 # ---- Kernelized SVM ----
 print("\nTesting Kernelized SVM")

@@ -15,7 +15,6 @@ labsVariance=0
 assignVariance=0
 midVariance=0
 
-
 for index, row in train.iterrows():
     labTemp=(row['L1']+row['L2']+row['L3']+row['L4']+row['L5']+row['L6']+row['L7']+row['L7B']+row['L8'])/9 - row['F']
     assignTemp=(row['A1']+row['A2']+row['A3']+row['A4']+row['A5'])/5 - row['F']
@@ -43,7 +42,7 @@ assignPortion=(1/assignVariance)/(1/labsVariance+1/assignVariance+1/midVariance)
 midtermPortion=(1/midVariance)/(1/labsVariance+1/assignVariance+1/midVariance)
 print("portions: ",labsPortion,assignPortion,midtermPortion)
 
-#Test portion 
+# Test portion 
 
 finalGuess = 0
 guessDiff=0

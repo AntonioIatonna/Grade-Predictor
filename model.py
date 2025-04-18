@@ -1,6 +1,4 @@
-import pandas as pd  # Use 'pd' for consistency
-from sklearn.preprocessing import StandardScaler
-from sklearn.preprocessing import RobustScaler
+import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.linear_model import ElasticNet
 import numpy as np
@@ -15,7 +13,7 @@ def createModelandTest(grades,numLabs, numAssignments,numMidterms):
     if numMidterms > 1:
         raise ValueError("Number of assignments cannot exceed 1.")
 
- # Define colomns for labs, assignments, midterm
+    # Define colomns for labs, assignments, midterm
     lab_cols = [f"L{i}" for i in range(1, 10)] 
     assignment_cols = [f"A{i}" for i in range(1, 6)]
     midterm_cols = [f"M"]
@@ -55,22 +53,20 @@ def createModelandTest(grades,numLabs, numAssignments,numMidterms):
     # Scale input
     scaled_input = scaler.transform(grades_df)
 
-    #Predict result with models
+    # Predict result with models
     predicted1 = enet1.predict(scaled_input)
     predicted2 = enet2.predict(scaled_input)
     predicted3 = enet3.predict(scaled_input)
     predicted4 = enet4.predict(scaled_input)
 
     # Average result
-    averaged_prediction = np.mean(
-    [predicted1, predicted2, predicted3, predicted4], axis=0
-)
+    averaged_prediction = np.mean([predicted1, predicted2, predicted3, predicted4], axis=0)
     return averaged_prediction[0]  
 
 def createModelandTestMidterm(grades, numLabs, numAssignments):
     df = pd.read_csv("FinalDataset.csv")
 
-    #Handle more labs/assignments the expected
+    # Handle more labs/assignments the expected
     if numLabs > 5:
         raise ValueError("Number of labs cannot exceed 5.")
     if numAssignments > 3:
@@ -119,11 +115,5 @@ def createModelandTestMidterm(grades, numLabs, numAssignments):
     predicted4 = enet4.predict(scaled_input)
 
     # Average predictions
-    averaged_prediction = np.mean(
-    [predicted1, predicted2, predicted3, predicted4], axis=0
-)
+    averaged_prediction = np.mean([predicted1, predicted2, predicted3, predicted4], axis=0)
     return averaged_prediction[0]
-    
-    
-
-

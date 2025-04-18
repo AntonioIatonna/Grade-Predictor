@@ -1,7 +1,7 @@
 from sklearn.svm import SVR
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import mean_squared_error, r2_score
+from sklearn.metrics import r2_score
 import pandas as pd
 
 # Load your dataset
@@ -30,7 +30,6 @@ svr.fit(X_train, y_train)
 # Make predictions
 y_pred = svr.predict(X_test)
 
-
 test_size = y_pred.size
 i=0
 total_difference=0
@@ -39,8 +38,6 @@ diff_less_than_20=0
 diff_less_than_10=0
 diff_less_than_5=0
 diff_less_than_1=0
-
-
 
 for x in y_pred:
     diff = abs(y_pred[i] - y_test.iloc[i])
